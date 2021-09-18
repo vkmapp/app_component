@@ -55,7 +55,16 @@ class _StepperWidgetState extends State<StepperWidget> {
       ];
 
   Widget _successPage() {
-    return const Center(child: Text('Success!'),);
+    return Center(child: Column(
+      children:  [
+        const Text('Success!'),
+        ElevatedButton(onPressed: (){
+          setState(() {
+            isCompleted = false;
+          });
+        }, child: const Text('RESET')),
+      ],
+    ),);
   }
 
   @override
