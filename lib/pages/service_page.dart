@@ -4,8 +4,11 @@ class ServicePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Service Page'),
+    return Container(
+      color: Colors.cyan,
+      child: const Center(
+        child: Text('Service Page'),
+      ),
     );
   }
 }

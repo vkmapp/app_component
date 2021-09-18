@@ -5,8 +5,11 @@ class AboutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('About Page'),
+    return Container(
+      color: Colors.grey,
+      child: const Center(
+        child: Text('About Page'),
+      ),
     );
   }
 }

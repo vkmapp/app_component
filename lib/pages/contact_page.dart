@@ -4,8 +4,11 @@ class ContactPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Contact Page'),
+    return Container(
+      color: Colors.blue,
+      child: const Center(
+        child: Text('Contact Page'),
+      ),
     );
   }
 }
