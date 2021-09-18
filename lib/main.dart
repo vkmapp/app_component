@@ -1,6 +1,8 @@
 import 'package:app_component/widgets/_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:otp_pin_field/otp_pin_field.dart';
 
+import 'layout/site_layout.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -16,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      home: const BaseLayout(), ///const ClockPage(),
     );
   }
 }
@@ -28,13 +30,18 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(body: SafeArea(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          OTPWidget(),
-        ],
+      child: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          children: const [
+            OTPWidget(),
+           ClockPage(),
+          ],
+        ),
       ),
-    ),);
+    ),
+    backgroundColor: Colors.white,);
   }
 }
+
+
