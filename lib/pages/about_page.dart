@@ -1,3 +1,4 @@
+import 'package:app_component/widgets/stepper/stepper.dart';
 import 'package:flutter/material.dart';
 
 class AboutPage extends StatelessWidget {
@@ -7,9 +8,7 @@ class AboutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.grey,
-      child: const Center(
-        child: Text('About Page'),
-      ),
+      child: StepperWidget(),
     );
   }
 }
