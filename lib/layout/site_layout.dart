@@ -13,7 +13,7 @@ class BaseLayout extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.brown,
+        backgroundColor: Colors.grey.withOpacity(0.3),
         actions: [
           TextButton(
             onPressed: () {
