@@ -1,3 +1,4 @@
+import 'package:app_component/widgets/expanstion/card_service.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
@@ -10,7 +11,8 @@ class AboutPage extends StatefulWidget {
   State<AboutPage> createState() => _AboutPageState();
 }
 
-class _AboutPageState extends State<AboutPage> with SingleTickerProviderStateMixin {
+class _AboutPageState extends State<AboutPage>
+    with SingleTickerProviderStateMixin {
   /// Image List
   List<String> imageList = [
     'https://images.unsplash.com/photo-1589758438368-0ad531db3366?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=4464&q=80',
@@ -32,28 +34,24 @@ class _AboutPageState extends State<AboutPage> with SingleTickerProviderStateMix
 
   bool expand = false;
 
-
   ///Setting up the animation
   void prepareAnimations() {
     expandController = AnimationController(
-        vsync: this,
-        duration: const Duration(milliseconds: 500)
-    );
+        vsync: this, duration: const Duration(milliseconds: 500));
     animation = CurvedAnimation(
       parent: expandController,
       curve: Curves.fastOutSlowIn,
     );
   }
 
-
   void _runExpandCheck() {
     if (expand) {
       expandController.forward();
-    }
-    else {
+    } else {
       expandController.reverse();
     }
   }
+
   @override
   void didUpdateWidget(AboutPage oldWidget) {
     super.didUpdateWidget(oldWidget);
@@ -66,46 +64,210 @@ class _AboutPageState extends State<AboutPage> with SingleTickerProviderStateMix
     super.dispose();
   }
 
-      @override
+  @override
   void initState() {
     super.initState();
     prepareAnimations();
     _runExpandCheck();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.withOpacity(0.1),
       body: SafeArea(
-        child: Container(
-          color: const Color(0xFFFFFFFF),
-          child: Column(
-            children: [
-              AnimatedOpacity(
-                duration: _duration,
-                opacity: isFade,
-                curve: Curves.bounceIn,
-                child: Visibility(
-                  visible: isShow,
-                  maintainState: true,
-                  maintainAnimation: true,
-                  //maintainSize: true,
-                  //maintainInteractivity: true,
-                  //maintainSemantics: true,
-                  child: Container(
-                    width: double.infinity,
-                    height: 100,
-                    color: Colors.grey.withOpacity(0.5),
-                    child: SizeTransition(
-                        axisAlignment: 1.0,
-                        sizeFactor: animation,
-                        child: Text('asdsad')
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Container(
+            child: Column(
+              children: [
+                CardService(),
+                /* AnimatedOpacity(
+                  duration: _duration,
+                  opacity: isFade,
+                  curve: Curves.bounceIn,
+                  child: Visibility(
+                    visible: isShow,
+                    maintainState: true,
+                    maintainAnimation: true,
+                    //maintainSize: true,
+                    //maintainInteractivity: true,
+                    //maintainSemantics: true,
+                    child: Container(
+                      width: double.infinity,
+                      height: 100,
+                      color: Colors.grey.withOpacity(0.5),
+                      child: SizeTransition(
+                          axisAlignment: 1.0,
+                          sizeFactor: animation,
+                          child: Text('asdsad')
+                      ),
                     ),
                   ),
+                ),*/
+                cardSlider(),
+                SizedBox(
+                  height: 10,
+                ),
+                detailWidget(),
+                SizedBox(
+                  height: 10,
+                ),
+                detailWidget1(),
+                SizedBox(
+                  height: 10,
+                ),
+                viewAllWidget(),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget viewAllWidget() {
+    return Padding(padding: EdgeInsets.all(15.0),
+    child: Card(
+      child: Container(
+        color: Colors.red,
+        padding: EdgeInsets.all(12),
+        child:
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Icon(Icons.height),
+            Spacer(),
+            Text('View all items'),
+            Spacer(),
+            Icon(Icons.arrow_forward_ios_sharp),
+          ],
+        ),
+      ),
+    ),);
+  }
+
+  Widget detailWidget() {
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Card(
+        elevation: 5,
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Container(
+                      color: Colors.red,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Title Text'),
+                          Text(
+                            'Value Text',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                      child: Container(
+                    color: Colors.blueGrey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Title Text'),
+                        Text(
+                          'Value Text',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
+                  ))
+                ],
+              ),
+              ElevatedButton(onPressed: () {}, child: Text('Test')),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget detailWidget1() {
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Card(
+        elevation: 5,
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                color: Colors.blueGrey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                        'Title Text ajkshd dkhask dkasd sakd aksksakdjh dhkjdhkdhkfdh khfkdhf kdfjkdhfkdhf'),
+                    Text(
+                      'Value Text',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    )
+                  ],
                 ),
               ),
-              cardSlider(),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Container(
+                      color: Colors.red,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Title Text'),
+                          Text(
+                            'Value Text',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                      child: Container(
+                    color: Colors.blueGrey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Title Text'),
+                        Text(
+                          'Value Text',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
+                  ))
+                ],
+              ),
+              ElevatedButton(onPressed: () {}, child: Text('Test')),
             ],
           ),
         ),
@@ -152,9 +314,10 @@ class _AboutPageState extends State<AboutPage> with SingleTickerProviderStateMix
                     child: InkWell(
                       onTap: () {
                         setState(() {
-                         isShow = !isShow;
-                         expand = !expand;
+                          isShow = !isShow;
+                          expand = !expand;
                         });
+
                         /// TODO: To navigate to next page
                       },
                     ),
