@@ -284,7 +284,9 @@ class _AboutPageState extends State<AboutPage>
         itemCount: imageList.length,
         dragStartBehavior: DragStartBehavior.down,
         itemBuilder: (context, index) {
-          return buildCard(index);
+          return InkWell(child: buildCard(index), onHighlightChanged: (value){
+            print(value);
+          },);
         },
         separatorBuilder: (context, index) {
           return const SizedBox(
@@ -312,12 +314,17 @@ class _AboutPageState extends State<AboutPage>
                     image: NetworkImage(imageList[index]),
                     fit: BoxFit.cover,
                     child: InkWell(
+                      onHighlightChanged: (value){
+                        print(value);
+                      },
+                      onFocusChange: (value){
+                        print('Test $value');
+                      },
                       onTap: () {
                         setState(() {
                           isShow = !isShow;
                           expand = !expand;
                         });
-
                         /// TODO: To navigate to next page
                       },
                     ),

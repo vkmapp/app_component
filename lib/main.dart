@@ -1,10 +1,30 @@
+import 'package:app_component/provider/collections_data_provider.dart';
+import 'package:app_component/provider/json_data_class.dart';
 import 'package:app_component/widgets/_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:otp_pin_field/otp_pin_field.dart';
+import 'package:get_it/get_it.dart';
+import 'package:provider/provider.dart';
 
 import 'layout/site_layout.dart';
+
+/// This is our global ServiceLocator
+GetIt getIt = GetIt.instance;
+
+/// Locator
+void getItLocator(){
+  getIt.registerSingleton(JsonDataClass());
+  getIt.registerSingleton(CollectionDataProvider());
+}
+
 void main() {
-  runApp(const MyApp());
+  /// getIt locator
+  getItLocator();
+
+  /// Run App
+  runApp(MultiProvider(providers: [
+    //const MyApp()
+    ChangeNotifierProvider.value(value: getIt<CollectionDataProvider>()),
+  ], child: const MyApp(),));
 }
 
 class MyApp extends StatelessWidget {
@@ -18,7 +38,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const BaseLayout(), ///const ClockPage(),
+      home: const BaseLayout(),
+
+      ///const ClockPage(),
     );
   }
 }
@@ -29,19 +51,19 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(body: SafeArea(
-      child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          children: const [
-            OTPWidget(),
-           ClockPage(),
-          ],
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: const [
+              OTPWidget(),
+              ClockPage(),
+            ],
+          ),
         ),
       ),
-    ),
-    backgroundColor: Colors.white,);
+      backgroundColor: Colors.white,
+    );
   }
 }
-
-
