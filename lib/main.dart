@@ -1,4 +1,5 @@
 import 'package:app_component/provider/collections_data_provider.dart';
+import 'package:app_component/provider/data/user_data_provider.dart';
 import 'package:app_component/provider/json_data_class.dart';
 import 'package:app_component/widgets/_widgets.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ GetIt getIt = GetIt.instance;
 void getItLocator(){
   getIt.registerSingleton(JsonDataClass());
   getIt.registerSingleton(CollectionDataProvider());
+  getIt.registerSingleton(UserDataProvider());
 }
 
 void main() {
@@ -24,6 +26,8 @@ void main() {
   runApp(MultiProvider(providers: [
     //const MyApp()
     ChangeNotifierProvider.value(value: getIt<CollectionDataProvider>()),
+    ChangeNotifierProvider.value(value: getIt<UserDataProvider>()),
+    FutureProvider.value(value: getIt<UserDataProvider>().fetchData(), initialData: {}),
   ], child: const MyApp(),));
 }
 

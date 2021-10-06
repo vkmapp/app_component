@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'json_data_class.dart';
+import 'list/user_list_widget.dart';
 
 class ProviderPage extends StatelessWidget {
   const ProviderPage({Key? key}) : super(key: key);
@@ -56,6 +57,7 @@ class ProviderPage extends StatelessWidget {
             },
             child: Text('Basic Api Call'),
           ),
+          //Expanded(child: UserList()),
           Expanded(
             child: ListView.builder(
               itemBuilder: (context, index) {
@@ -66,7 +68,8 @@ class ProviderPage extends StatelessWidget {
               },
               itemCount: context.watch<JsonDataClass>().resultUsers.length,
             ),
-          )
+          ),
+
         ],
       ),
     );
