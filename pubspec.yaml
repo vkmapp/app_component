@@ -38,6 +38,9 @@ dependencies:
   get_it: ^7.2.0
   scroll_snap_list: ^0.8.2
   http: ^0.13.3
+  backdrop: ^0.6.2
+  google_fonts: ^2.1.0
+  user_profile_avatar: ^0.1.0
 
 dev_dependencies:
   flutter_test:

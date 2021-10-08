@@ -1,9 +1,14 @@
+import 'package:app_component/pages/color.dart';
+import 'package:app_component/pages/dashboard/dashboard_backdrop_provider.dart';
+import 'package:app_component/pages/dashboard/dashboard_mobile.dart';
+import 'package:app_component/pages/dashboard/dashboard_with_backdorp.dart';
 import 'package:app_component/provider/collections_data_provider.dart';
 import 'package:app_component/provider/data/user_data_provider.dart';
 import 'package:app_component/provider/json_data_class.dart';
 import 'package:app_component/widgets/_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'layout/site_layout.dart';
@@ -16,6 +21,7 @@ void getItLocator(){
   getIt.registerSingleton(JsonDataClass());
   getIt.registerSingleton(CollectionDataProvider());
   getIt.registerSingleton(UserDataProvider());
+  getIt.registerSingleton(DashboardProvider());
 }
 
 void main() {
@@ -27,6 +33,7 @@ void main() {
     //const MyApp()
     ChangeNotifierProvider.value(value: getIt<CollectionDataProvider>()),
     ChangeNotifierProvider.value(value: getIt<UserDataProvider>()),
+    ChangeNotifierProvider.value(value: getIt<DashboardProvider>()),
     FutureProvider.value(value: getIt<UserDataProvider>().fetchData(), initialData: {}),
   ], child: const MyApp(),));
 }
@@ -39,10 +46,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Widgets',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        //primarySwatch: Color(0xFF801B3D),
+        //primaryColor: const Color(0xFF801B3D),
+        //textTheme: GoogleFonts.poppinsTextTheme(),
+        //scaffoldBackgroundColor: kPrimary,
       ),
-      home: const BaseLayout(),
+      home: const DashboardWithBackdrop() //DashboardMobile(),//const BaseLayout(),
 
       ///const ClockPage(),
     );
