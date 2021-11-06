@@ -11,6 +11,8 @@ import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import 'List/history_page.dart';
+import 'List/list_history.dart';
 import 'layout/site_layout.dart';
 
 /// This is our global ServiceLocator
@@ -53,7 +55,7 @@ class MyApp extends StatelessWidget {
         //textTheme: GoogleFonts.poppinsTextTheme(),
         //scaffoldBackgroundColor: kPrimary,
       ),
-      home: const DashboardWithBackdrop() //DashboardMobile(),//const BaseLayout(),
+      home: Scaffold(body: HistoryPage())//DashboardWithBackdrop() //DashboardMobile(),//const BaseLayout(),
 
       ///const ClockPage(),
     );
