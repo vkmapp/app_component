@@ -7,6 +7,7 @@ import 'package:app_component/provider/data/user_data_provider.dart';
 import 'package:app_component/provider/json_data_class.dart';
 import 'package:app_component/widgets/_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -14,6 +15,7 @@ import 'package:provider/provider.dart';
 import 'List/history_page.dart';
 import 'List/list_history.dart';
 import 'layout/site_layout.dart';
+import 'ticker/ticker_page.dart';
 
 /// This is our global ServiceLocator
 GetIt getIt = GetIt.instance;
@@ -55,10 +57,7 @@ class MyApp extends StatelessWidget {
         //textTheme: GoogleFonts.poppinsTextTheme(),
         //scaffoldBackgroundColor: kPrimary,
       ),
-      home: Scaffold(body: HistoryPage())//DashboardWithBackdrop() //DashboardMobile(),//const BaseLayout(),
-
-      ///const ClockPage(),
-    );
+      home: Scaffold(body: Container(child: TickerPage(),)));
   }
 }
 
